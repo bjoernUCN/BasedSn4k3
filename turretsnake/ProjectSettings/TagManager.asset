@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SnakeComponent
   - ItemComponent
+  - Impassable
   layers:
   - Default
   - TransparentFX

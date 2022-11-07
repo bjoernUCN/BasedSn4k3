@@ -27,6 +27,10 @@ public class GridPosition : MonoBehaviour
         this.y = y;
     }
     
+    public Vector3 GetFullPosition()
+    {
+        return position;
+    }
 
     private void FixedUpdate()
     {

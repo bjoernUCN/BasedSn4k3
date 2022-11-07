@@ -9,11 +9,16 @@ public class Movement1 : MonoBehaviour
     UserInput uimp;
     float timer;
 
+    [SerializeField] bool useCollsion;
+    CollisionManager collisionManager;
+
     void Start()
     {
         //uimp = GetComponent<UserInput>();
         uimp = UserInput.GetInstance();
         gridPosition = GetComponent<GridPosition>();
+
+        if(useCollsion) collisionManager = GetComponent<CollisionManager>();
     }
 
 
@@ -22,11 +27,20 @@ public class Movement1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+
         timer += Time.deltaTime;
-        if (uimp.GetMovementDir() != Vector3.zero)
+        Vector3 movementDirection = uimp.GetMovementDir();
+        if (movementDirection != Vector3.zero && collisionManager.CanGoTo(movementDirection))
         {
-            ChangePosition((int)uimp.GetMovementDir().x, (int)uimp.GetMovementDir().z);
+            ChangePosition((int)movementDirection.x, (int)movementDirection.z);
         }
+
+        //DEBUG
+        //collisionManager.CanGoTo(movementDirection);
+        //DEBUG
+
     }
 
     private void ChangePosition(int x, int y)

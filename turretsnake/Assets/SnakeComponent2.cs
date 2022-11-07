@@ -10,6 +10,9 @@ public class SnakeComponent2 : MonoBehaviour
     
     public void Detatch()
     {
+        if(next!=null)
+            next.Detatch();
+
         prev.next = null;
         this.prev = null;
     }
