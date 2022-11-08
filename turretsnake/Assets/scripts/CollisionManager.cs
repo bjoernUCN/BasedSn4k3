@@ -24,8 +24,8 @@ public class CollisionManager : MonoBehaviour
         if (m_IsHit)
         {
             //Output the name of the Collider your Box hit
-            Debug.Log("Hit : " + m_Hit.collider.name);
-            Debug.DrawLine(transform.position, m_Hit.point);
+            //Debug.Log("Hit : " + m_Hit.collider.name);
+            //Debug.DrawLine(transform.position, m_Hit.point);
 
             if (m_Hit.transform.CompareTag("SnakeComponent") && m_Hit.transform.GetComponent<SnakeComponent2>().prev == null)
             {

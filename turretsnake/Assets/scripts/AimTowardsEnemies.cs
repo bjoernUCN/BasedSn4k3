@@ -68,7 +68,7 @@ public class AimTowardsEnemies : MonoBehaviour
                 Vector3 targetPos = aimTo.transform.position;
                 targetPos.y = transform.position.y;
                 transform.forward = targetPos - transform.position;
-                Debug.Log(aimTo.name);
+                //Debug.Log(aimTo.name);
             }
             else
             {
