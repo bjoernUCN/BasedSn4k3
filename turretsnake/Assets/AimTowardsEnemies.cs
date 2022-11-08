@@ -42,26 +42,43 @@ public class AimTowardsEnemies : MonoBehaviour
     {
         if (enemies.Count > 0)
         {
-            float smallestDist = Vector3.Distance(transform.position, enemies[0].transform.position);
-            GameObject aimTo = enemies[0];
-
-            for (int i = 1; i < enemies.Count; i++)
+            if (enemies[0] != null)
             {
-                float newDist = Vector3.Distance(transform.position, enemies[i].transform.position);
-                if (smallestDist > newDist)
+                float smallestDist = Vector3.Distance(transform.position, enemies[0].transform.position);
+                GameObject aimTo = enemies[0];
+
+                for (int i = 1; i < enemies.Count; i++)
                 {
-                    smallestDist = newDist;
-                    aimTo = enemies[i];
+                    if (enemies[i] != null)
+                    {
+                        float newDist = Vector3.Distance(transform.position, enemies[i].transform.position);
+                        if (smallestDist > newDist)
+                        {
+                            smallestDist = newDist;
+                            aimTo = enemies[i];
+                        }
+                    }
+                    else
+                    {
+                        enemies.RemoveAt(i);
+                    }
                 }
+
+                //Commit aim
+                Vector3 targetPos = aimTo.transform.position;
+                targetPos.y = transform.position.y;
+                transform.forward = targetPos - transform.position;
+                Debug.Log(aimTo.name);
             }
+            else
+            {
+                enemies.RemoveAt(0);
+            }
+           
 
-            Vector3 targetPos = aimTo.transform.position;
-            targetPos.y = transform.position.y;
-            //targetDir.x = 0;
-            transform.forward = targetPos - transform.position;
+           
 
-
-            Debug.Log(aimTo.name);
+           
         }
         
     }
