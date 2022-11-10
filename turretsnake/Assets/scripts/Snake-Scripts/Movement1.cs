@@ -27,9 +27,6 @@ public class Movement1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
-
         timer += Time.deltaTime;
         Vector3 movementDirection = uimp.GetMovementDir();
         if (movementDirection != Vector3.zero && collisionManager.CanGoTo(movementDirection))

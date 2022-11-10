@@ -5,7 +5,7 @@ using UnityEngine;
 public class EatItems : MonoBehaviour
 {
     private List<GameObject>pickUps = new List<GameObject>();
-
+    [SerializeField] GameObject particle;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("ItemComponent")){
@@ -22,10 +22,13 @@ public class EatItems : MonoBehaviour
 
 
     private void AddToSnake()
-    {
+    {   if(particle!=null)
+            Instantiate(particle,transform.position,Quaternion.identity);
         for (int i = 0; i < pickUps.Count; i++)
         {
             GetComponent<SnakeComponent2>().GetLast().Attatch(pickUps[i].GetComponent<PickUp>().GetHeldObject().GetComponent<SnakeComponent2>());
+            //pickUps[i].GetComponent<PickUp>().GetHeldObject().GetComponent<SnakeComponent2>().RecursionMove();
+            GetComponent<SnakeComponent2>().GetLast().RecursionMove(); //Animate immedialy
             pickUps[i].GetComponent<PickUp>().Delete();
             pickUps.RemoveAt(i);
 

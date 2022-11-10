@@ -26,7 +26,7 @@ public class PickUp : MonoBehaviour
 
     public GameObject GetHeldObject()
     {
-        GameObject g = Instantiate(addedObject);
+        GameObject g = Instantiate(addedObject,transform.position,Quaternion.identity);
         return g;
     }
 

@@ -45,3 +45,5 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *.log
+turretsnake/Logs/AssetImportWorker1-prev.log
+turretsnake/Logs/AssetImportWorker0.log

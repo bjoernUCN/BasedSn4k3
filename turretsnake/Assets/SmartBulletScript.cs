@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class BulletScript : MonoBehaviour
+public class SmartBulletScript : MonoBehaviour
 {
-    
+    [SerializeField] public AimTowardsTags aimTowardsTags;
+
     [SerializeField] float lifetime;
 
     [SerializeField] float projectileVelocity;
@@ -13,8 +13,6 @@ public class BulletScript : MonoBehaviour
     private void Awake()
     {
         Destroy(gameObject, lifetime);
-        rb.AddForce(-transform.up * projectileVelocity,ForceMode.Impulse);
+        rb.AddForce(-transform.up * projectileVelocity, ForceMode.Impulse);
     }
-
-
 }

@@ -8,6 +8,7 @@ TagManager:
   - ItemComponent
   - Impassable
   - Enemy
+  - Base
   layers:
   - Default
   - TransparentFX

@@ -19,13 +19,7 @@ public class CameraTargetFollow : MonoBehaviour
         rotation = transform.rotation;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //transform.position = offset+target.transform.position;
-         
-
-    }
+    
 
     private void FixedUpdate()
     {
