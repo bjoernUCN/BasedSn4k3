@@ -110,7 +110,7 @@ public class AimTowardsTags : MonoBehaviour
                 {
                     for (int io = 0; io < GetByTag(tags[i]).Count; io++)
                     {
-                        Debug.Log(GetByTag(tags[i])[io].name);
+                        //Debug.Log(GetByTag(tags[i])[io].name);
                         Debug.DrawLine(GetByTag(tags[i])[io].transform.position, transform.position, Color.red);
                     }
                 }
