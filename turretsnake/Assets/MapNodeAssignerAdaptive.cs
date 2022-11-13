@@ -20,19 +20,17 @@ public class MapNodeAssignerAdaptive : MonoBehaviour
 
         while (OpenNodes.Count > 0 && attempts>0)
         {
-            Debug.Log(attempts + " " + OpenNodes[0]);
+            //Debug.Log(attempts + " " + OpenNodes[0]);
             Debug.DrawRay(new Vector3(OpenNodes[0].x, transform.position.y, OpenNodes[0].y), Vector3.up, Color.white, 12);
 
             ExpandOne();
             attempts--;
-            
         }
-
 
         instance = TileOccupationMap.Instance;
         foreach (Vector2 node in ClosedNodes)
         {
-            Debug.Log("Added " + node);
+            //Debug.Log("Added " + node);
             Debug.DrawRay(new Vector3(node.x, transform.position.y, node.y), Vector3.up, Color.green, 22);
             AddToMap(node);
         }

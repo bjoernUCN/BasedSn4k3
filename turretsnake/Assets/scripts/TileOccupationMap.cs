@@ -31,7 +31,8 @@ public class TileOccupationMap : MonoBehaviour
 
     public void Add(int x, int y, GameObject value)
     {
-        occupiedNodes.Add(new Vector2(x,y), value);
+        if(!Has(x,y))
+            occupiedNodes.Add(new Vector2(x,y), value);
     }
 
     public void Remove(int x, int y)

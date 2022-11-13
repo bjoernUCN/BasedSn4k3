@@ -102,7 +102,7 @@ public class AimTowardsTags : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Application.isPlaying)
+        if (Application.isPlaying && false) //MANUAl TOGGLE
         {
             for (int i = 0; i < tags.Count; i++)
             {
