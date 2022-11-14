@@ -14,16 +14,19 @@ public class PathToGameObject : MonoBehaviour
     Dictionary<Vector2,Vector2> orderPaths = new Dictionary<Vector2,Vector2>();
 
     public List<Vector2> path;
-    private void Start()
+   /* private void Start()
     {
-        Open.Add(AsIntVector2(transform.position));
-    }
-
+        //Open.Add(AsIntVector2(transform.position));
+    }*/
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKey(KeyCode.Q))
         {
-            if (Open[0] == AsIntVector2(target.transform.position))
+            //if (Open[0] == AsIntVector2(target.transform.position)
+            //  || TileOccupationMap.Instance.Has(Mathf.RoundToInt(target.transform.position.x), Mathf.RoundToInt(target.transform.position.y)) 
+            // && TileOccupationMap.Instance.Get(Mathf.RoundToInt(target.transform.position.x), Mathf.RoundToInt(target.transform.position.y))==target)
+            if (FoundTarget(Open[0]))
             {
                 Debug.Log("HitTarget");
                 path = RetraceFrom(Open[0], new List<Vector2>());
@@ -38,27 +41,58 @@ public class PathToGameObject : MonoBehaviour
             UpdatePath();
 
     }
+    */
+    private bool FoundTarget(Vector2 vector2)
+    {
+       bool found = false;
+       found = CheckPosition(vector2);
+
+
+        {//Foundnear Scope
+           if(CheckPosition(vector2+Vector2.up) 
+                || CheckPosition(vector2 + Vector2.right) 
+                || CheckPosition(vector2 + Vector2.down) 
+                || CheckPosition(vector2 + Vector2.left))
+                found = true;
+        }
+        
+        bool CheckPosition(Vector2 vec)
+        {
+            bool returnBool = false;
+            if (vec == AsIntVector2(target.transform.position))
+                returnBool = true;
+
+            if (TileOccupationMap.Instance.Has(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y))
+                && TileOccupationMap.Instance.Get(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y)) == target)
+                returnBool = true;
+
+            return returnBool;
+        }
+
+        return found;
+    }
 
     public void UpdatePath()
     {
         ResetLists();
         Open.Add(AsIntVector2(transform.position));
 
-        int attempts = 1520;
+        int attempts = 2520;
         while (Open.Count > 0 && attempts>0)
         {
             attempts--;
 
             Vector2 pos = Open[0];
-            if (Open[0] == null || target==null)//These too lines are a bit odd, i might have to change these
+            if (pos == null || target==null)//These too lines are a bit odd, i might have to change these
             {
                 break; 
             }
                 
 
-            if (pos == AsIntVector2(target.transform.position))
+            //if (pos == AsIntVector2(target.transform.position))
+            if (FoundTarget(pos))
             {
-                Debug.Log("HitTarget");
+                //Debug.Log("HitTarget");
                 path = RetraceFrom(pos, new List<Vector2>());
                 break;
             }
@@ -135,14 +169,15 @@ public class PathToGameObject : MonoBehaviour
         
         for (int i = 0; i < Open.Count; i++)
         {
-            CubeAt(Open, i, Vector3.one);
+            CubeAt(Open, i, new Vector3(1, 0f, 1));
         }
 
         //Gizmos.color = Color.black;
         Gizmos.color = new Color(0, 0, 0, 0.1f);
         for (int i = 0; i < Closed.Count; i++)
         {
-            CubeAt(Closed, i, new Vector3(1,0f,1));
+            //CubeAt(Closed, i, new Vector3(1,0f,1));
+            Gizmos.DrawSphere(new Vector3(Closed[i].x, 0, Closed[i].y), 0.1f);
         }
 
         Gizmos.color = Color.red;
@@ -151,16 +186,16 @@ public class PathToGameObject : MonoBehaviour
             CubeAt(Occupied, i, Vector3.one*0.9f);
         }
 
+
         void CubeAt(List<Vector2> vL, int i, Vector3 size)
         {
             Gizmos.DrawWireCube(new Vector3(vL[i].x, 0, vL[i].y), size);
         }
 
-
         Gizmos.color = Color.white;
         for (int i = 0; i < path.Count; i++)
         {
-            CubeAt(path, i, new Vector3(1.1f,0,1.1f));
+            //CubeAt(path, i, new Vector3(1.1f,0,1.1f));
 
             if(i!=0)
                 Debug.DrawLine(new Vector3(path[i-1].x,0.5f,path[i-1].y), new Vector3(path[i].x, 0.5f, path[i].y));

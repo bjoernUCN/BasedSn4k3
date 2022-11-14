@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 739143097411969750}
   - component: {fileID: 739143097411969751}
   - component: {fileID: 739143097411969746}
+  - component: {fileID: 8327205111665324437}
   m_Layer: 0
   m_Name: Cube Tail
   m_TagString: SnakeComponent
@@ -133,3 +134,15 @@ MonoBehaviour:
   prev: {fileID: 0}
   next: {fileID: 0}
   NumberInRow: 0
+--- !u!114 &8327205111665324437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739143097411969753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c9cbfebb6f4e244a5521151da34bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

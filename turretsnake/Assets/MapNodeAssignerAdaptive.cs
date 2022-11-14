@@ -7,7 +7,7 @@ public class MapNodeAssignerAdaptive : MonoBehaviour
     // Start is called before the first frame update
     List<Vector2>ClosedNodes = new List<Vector2>();
     List<Vector2> OpenNodes = new List<Vector2>();
-    int attempts = 30;
+    int attempts = 130;
     TileOccupationMap instance;
     Collider coll;
     void Start()

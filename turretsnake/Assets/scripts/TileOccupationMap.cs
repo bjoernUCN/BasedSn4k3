@@ -29,10 +29,14 @@ public class TileOccupationMap : MonoBehaviour
         return occupiedNodes[new Vector2(x,y)];
     }
 
-    public void Add(int x, int y, GameObject value)
+    public bool Add(int x, int y, GameObject value)
     {
-        if(!Has(x,y))
-            occupiedNodes.Add(new Vector2(x,y), value);
+        if (!Has(x, y))
+        {
+            occupiedNodes.Add(new Vector2(x, y), value);
+            return true;
+        }
+        else return false;
     }
 
     public void Remove(int x, int y)

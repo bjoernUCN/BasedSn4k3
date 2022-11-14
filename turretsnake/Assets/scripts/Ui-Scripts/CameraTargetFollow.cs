@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraTargetFollow : MonoBehaviour
 {
-    Vector3 offset;
+    [SerializeField] Vector3 offset;
     Quaternion rotation;
 
     [SerializeField] float spd;
