@@ -17,8 +17,9 @@ public class DoDamageOnHit : MonoBehaviour
 
     private void DoDamage(GameObject g)
     {
-        //ToDo
-        g.GetComponent<Health>().DealDamage(dmg);
-        //Debug.Log("Hit " + g.name);
+        if(g.GetComponent<Health>())
+            g.GetComponent<Health>().DealDamage(dmg);
+        if(g.GetComponent<HealthReference>())
+            g.GetComponent<HealthReference>().DealDamage(dmg);
     }
 }

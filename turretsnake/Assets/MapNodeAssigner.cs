@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MapNodeAssigner : MonoBehaviour
 {
-    
     private void Start()
     {
         if(!TileOccupationMap.Instance.Has(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)))

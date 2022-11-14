@@ -43,10 +43,19 @@ public class PathToGameObject : MonoBehaviour
     {
         ResetLists();
         Open.Add(AsIntVector2(transform.position));
-       
-        while (Open.Count > 0)
+
+        int attempts = 1520;
+        while (Open.Count > 0 && attempts>0)
         {
+            attempts--;
+
             Vector2 pos = Open[0];
+            if (Open[0] == null || target==null)//These too lines are a bit odd, i might have to change these
+            {
+                break; 
+            }
+                
+
             if (pos == AsIntVector2(target.transform.position))
             {
                 Debug.Log("HitTarget");
