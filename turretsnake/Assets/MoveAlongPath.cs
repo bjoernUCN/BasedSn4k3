@@ -2,44 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveAlongPath : MonoBehaviour
+public class MoveAlongPath : Toggleable
 {
     PathToGameObject pathing;
     [SerializeField] float updateTimer;
     float timer;
     [SerializeField] float movementSpeed;
     GridPosition gp;
+
     private void Start()
     {
-        gp= GetComponent<GridPosition>();
+        gp = GetComponent<GridPosition>();
         pathing = GetComponent<PathToGameObject>();
     }
 
-    void Update()
+    public void Move()
+    {
+        if (pathing.path.Count > 0)
+        {
+            gp.AssignXandY(pathing.path[0].x, pathing.path[0].y);
+
+            if (GetComponent<SnakeComponent2>()) //If this script is on a snake, move all blocks along the chain
+                GetComponent<SnakeComponent2>().RecursionMove();
+        }
+    }
+
+    public bool CountDown()
     {
         if (timer > updateTimer)
         {
             timer = 0;
-            pathing.UpdatePath();
+            return true;
+        }
+        else timer += Time.deltaTime;
 
-            //move entity
-            if(pathing.path.Count > 0)
+        return false;
+    }
+
+    public void UpdatePath()
+    {
+        pathing.UpdatePath();
+    }
+
+    void Update()
+    {
+        if(isOn)
+            if (CountDown())
             {
-                gp.AssignXandY(pathing.path[0].x, pathing.path[0].y);
-                
-                if(GetComponent<SnakeComponent2>()) //If this script is on a snake, move all blocks along the chain
-                    GetComponent<SnakeComponent2>().RecursionMove();
+                UpdatePath();
+                Move();
             }
-                
-        } else timer+=Time.deltaTime;
-
-        /*if (pathing.path.Count > 0)
-        {
-            //transform.Translate((new Vector3(pathing.path[0].x,0,pathing.path[0].y) - transform.position) * Time.deltaTime * movementSpeed);
-          
-        }*/
-
-        
 
 
     }

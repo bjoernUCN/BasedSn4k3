@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PathToGameObject))]
 
 
-public class SlideAlongPath : MonoBehaviour
+public class SlideAlongPath : Toggleable
 {
     float pathUpdateTimer;
     [SerializeField] float pathUpdateFrequence;
@@ -39,7 +39,7 @@ public class SlideAlongPath : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (pather.path.Count > 0)
+        if (pather.path.Count > 0&& isOn)
         {
             Vector3 target = new Vector3 (pather.path[0].x, 0, pather.path[0].y);
             rb.AddForce((target-transform.position) * speed);

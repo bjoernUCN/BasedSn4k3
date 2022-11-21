@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PathToGameObject : MonoBehaviour
 {
-    [SerializeField] List<Vector2>Open = new List<Vector2>();
-    [SerializeField] List<Vector2>Closed = new List<Vector2>();
-    [SerializeField] List<Vector2>Occupied = new List<Vector2>();
+   /* [SerializeField]*/ List<Vector2>Open = new List<Vector2>();
+   /* [SerializeField]*/ List<Vector2>Closed = new List<Vector2>();
+   /* [SerializeField]*/ List<Vector2>Occupied = new List<Vector2>();
 
     [SerializeField] GameObject target;
 
@@ -42,6 +42,14 @@ public class PathToGameObject : MonoBehaviour
 
     }
     */
+
+
+
+    public void SetTarget(GameObject t)
+    {
+        target = t;
+    }
+
     private bool FoundTarget(Vector2 vector2)
     {
        bool found = false;
@@ -82,12 +90,13 @@ public class PathToGameObject : MonoBehaviour
         {
             attempts--;
 
-            Vector2 pos = Open[0];
+            //Vector2 pos = Open[0]; //no heuristic
+            Vector2 pos = AStarHeuristic(Open);
+
             if (pos == null || target==null)//These too lines are a bit odd, i might have to change these
             {
                 break; 
             }
-                
 
             //if (pos == AsIntVector2(target.transform.position))
             if (FoundTarget(pos))
@@ -100,6 +109,48 @@ public class PathToGameObject : MonoBehaviour
             {
                 Expand(pos);
             }
+        }
+    }
+
+    private Vector2 AStarHeuristic(List<Vector2> open)
+    {
+        Vector2 result = new Vector2();
+
+        if (open[0] == null)
+        {
+            open.RemoveAt(0);
+        }
+        else
+        {   //Find the best point (According to A*)
+            if (open[0] == null || target == null)
+            {
+                return result;
+            }
+            float bestDist = DistEval(open[0]);
+            result = open[0];
+
+            for (int i = 0; i < open.Count; i++)
+            {
+                float newEval = DistEval(open[i]);
+                if (newEval < bestDist)
+                {
+
+                    result = open[i];
+                    bestDist = newEval;
+                }
+            }
+        }
+
+        return result;
+
+        //Methods
+
+        float DistEval(Vector2 v)
+        {
+            Vector2 t = AsIntVector2(target.transform.position);
+            Vector2 o = AsIntVector2(transform.position);
+            return Vector2.Distance(v, o) + Vector2.Distance(v,t);
+            
         }
     }
 
